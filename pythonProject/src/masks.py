@@ -4,13 +4,7 @@ def get_mask_card_number(card_number: str) -> str:
     return masked_card
 
 
-print(get_mask_card_number(input('Введите номер карты: ')))
-
-
 def get_mask_account(account_number: str) -> str:
     """Функция, которая возвращает маску счета"""
     masked_account_number = '**' + account_number[-4:]
     return masked_account_number
-
-
-print(get_mask_account(input('Введите номер счета: ')))
