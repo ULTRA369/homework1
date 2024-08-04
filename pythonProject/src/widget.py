@@ -1,4 +1,4 @@
-from masks import get_mask_card_number, get_mask_account
+from masks import get_mask_account, get_mask_card_number
 
 card_or_account_request = input("Введите номер карты или счета: ")
 
