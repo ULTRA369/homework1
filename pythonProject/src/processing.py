@@ -1,4 +1,4 @@
-def filter_by_state(dict_list, state='EXECUTED'):
+def filter_by_state(dict_list: list, state: str = 'EXECUTED') -> list:
     """Функция оставляет только выполненные операции по ключу EXECUTED"""
     result = []
     for i in dict_list:
@@ -18,9 +18,9 @@ filtered_data = filter_by_state(data)
 print(filtered_data)
 
 
-def sort_by_date(operations_data: list[dict]) -> list[dict]:
+def sort_by_date(operations_data: list, reverse_list: bool = True) -> list:
     """Сортирует список по дате"""
-    sorted_list = sorted(operations_data, key=lambda x: x['date'], reverse=True)
+    sorted_list = sorted(operations_data, key=lambda x: x['date'], reverse=reverse_list)
     return sorted_list
 
 
