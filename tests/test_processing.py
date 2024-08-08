@@ -1,6 +1,4 @@
-from typing import Any, Dict, List
-
-import pytest
+from typing import Any
 
 from src.processing import filter_by_state, sort_by_date
 
