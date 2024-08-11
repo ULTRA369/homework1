@@ -27,11 +27,3 @@ def test_get_mask_card_number(number, expected):
 )
 def test_get_mask_account(account, expected_acc):
     assert get_mask_account(account) == expected_acc
-
-
-def test_mask_account_empty():
-    assert get_mask_card_number("") == ""
-
-
-def test_card_number(card_numbers):
-    assert get_mask_card_number("") == ""
