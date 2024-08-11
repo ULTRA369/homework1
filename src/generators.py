@@ -62,8 +62,8 @@ def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[str
         yield transaction["description"]
 
 
-def card_number_generator(start: int, end: int) -> Iterator[str]:
-    """Выдает номера банковских карт в формате XXXX XXXX XXXX XXXX"""
-    for num in range(start, end + 1):
-        num_str = "{:016d}".format(num)
-        yield "{} {} {} {}".format(num_str[:4], num_str[4:8], num_str[8:12], num_str[12:16])
+def card_number_generator(start, end):
+    """Функция, которая генерирует номера карт"""
+    for number in range(start, end + 1):
+        formatted_number = f"{number:016}"
+        yield f"{formatted_number[:4]} {formatted_number[4:8]} {formatted_number[8:12]} {formatted_number[12:]}"
