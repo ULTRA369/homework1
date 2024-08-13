@@ -5,15 +5,11 @@ import pytest
 from src.decorators import log
 
 
-@log(filename="src/mylog.txt")  # Using double backslashes
+@log(filename="src\\mylog.txt")
 def my_function(x: int, y: int) -> int:
     """Сложите два целых числа и верните результат"""
     return x + y
 
-
-@pytest.mark.parametrize("filename", [None, "src/mylog.txt"])  # Using double backslashes
-def test_log(capsys: Any, filename: Optional[str]) -> None:
-    """Тест log"""
 
     @log(filename)
     def test_func() -> None:
