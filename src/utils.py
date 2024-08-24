@@ -1,36 +1,28 @@
 import json
-import os
+from json import JSONDecodeError
 
-from src.external_api import get_exchange_amount
+from src.external_api import currency_conversion
 
 
-def get_operations(file_path):
-    """
-    Загружает данные о транзакциях из JSON-файла.
-
-    :param file_path: Абсолютный путь до JSON-файла
-    :return: Список словарей с данными о транзакциях или пустой список в случае ошибок.
-    """
-    if not os.path.isfile(file_path):
-        return []
-
+def financial_transactions(path: str) -> list:
+    """Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях."""
     try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            data = json.load(file)
-
-            if isinstance(data, list):
-                return data
-            else:
+        with open(path, encoding='utf-8') as financial_file:
+            try:
+                transactions = json.load(financial_file)
+            except JSONDecodeError:
                 return []
-    except (json.JSONDecodeError, OSError) as e:
-        print(f"Ошибка при чтении файла: {e}")
+        if not isinstance(transactions, list):
+            return []
+        return transactions
+    except FileNotFoundError:
         return []
 
 
-def get_transaction_amount(transaction: dict) -> float:
-    if transaction["operationAmount"]["currency"]["code"] == "RUB":
-        return transaction["operationAmount"].get("amount")
+def transaction_amount(trans: dict, currency: str = "RUB") -> float:
+    """Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
+    if trans["operationAmount"]["currency"]["code"] == currency:
+        amount = trans["operationAmount"]["amount"]
     else:
-        return get_exchange_amount(
-            transaction["operationAmount"]["currency"].get("code"), transaction["operationAmount"].get("amount")
-        )
+        amount = currency_conversion(trans)
+    return amount

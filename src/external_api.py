@@ -1,22 +1,21 @@
-import os
-
 import requests
+import os
 from dotenv import load_dotenv
 
 
-def get_exchange_amount(currency: str, amount: str) -> float:
-    """Получает текущий курс валюты к рублю и конвертирует сумму в рубли по текущему курсу"""
-    load_dotenv()
+load_dotenv()
+values = os.getenv("PASSWORD")
+keys = os.getenv("API_KEY")
+headers = {keys: values}
 
-    api_key = os.getenv("API_KEY")
 
-    url = "https://api.apilayer.com/exchangerates_data/convert"
-
-    payload = {"amount": amount, "from": currency, "to": "RUB"}
-    headers = {"apikey": api_key}
-
-    response = requests.request("GET", url, headers=headers, params=payload)
-
-    result = response.json().get("result")
-
-    return result
+def currency_conversion(transaction: dict) -> float:
+    """Функция конвертации"""
+    amout = transaction["operationAmount"]["amount"]
+    code = transaction["operationAmount"]["currency"]["code"]
+    to = "RUB"
+    url = f"https://api.apilayer.com/exchangerates_data/convert?to={to}&from={code}&amount={amout}"
+    payload = {}
+    response = requests.get(url, headers=headers, data=payload)
+    result = response.json()
+    return result["result"]
