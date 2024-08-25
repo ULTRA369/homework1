@@ -1,5 +1,5 @@
 import pytest
-from src.utils import financial_transactions, transaction_amount
+from src.utils import financial_transactions, get_transaction_amount
 
 
 @pytest.fixture
@@ -46,5 +46,5 @@ def test_financial_transactions_mistake_json(path_mistake_json):
     assert financial_transactions(path_mistake_json) == []
 
 
-def test_transaction_amount(trans):
-    assert transaction_amount(trans) == '31957.58'
+def test_get_transaction_amount(trans):
+    assert get_transaction_amount(trans) == '31957.58'
