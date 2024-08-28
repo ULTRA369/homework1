@@ -2,15 +2,14 @@ import json
 import logging
 from json import JSONDecodeError
 
-
-logger = logging.getLogger('utils')    # создаем логер
-logger.setLevel(logging.DEBUG)    # уровень вывода сообщения не меньше DEBUG
+logger = logging.getLogger('utils')  # создаем логер
+logger.setLevel(logging.DEBUG)  # уровень вывода сообщения не меньше DEBUG
 # создаем хендлер и указываем в какой папке будет лог и имя лога:
 file_handler = logging.FileHandler('../logs/utils.log')
 # создаем и настраиваем  форматтер логера:
 file_formatter = logging.Formatter('%(asctime)s - %(name)s %(levelname)s: %(message)s')
-file_handler.setFormatter(file_formatter)    # подключаем к логгеру форматтер
-logger.addHandler(file_handler)    # подключаем к логгеру хендлер
+file_handler.setFormatter(file_formatter)  # подключаем к логгеру форматтер
+logger.addHandler(file_handler)  # подключаем к логгеру хендлер
 
 
 def financial_transactions(path: str) -> list:
