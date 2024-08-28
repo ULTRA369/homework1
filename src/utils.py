@@ -4,6 +4,7 @@ from json import JSONDecodeError
 
 logger = logging.getLogger('utils')  # создаем логер
 logger.setLevel(logging.DEBUG)  # уровень вывода сообщения не меньше DEBUG
+logger.filemode = 'w'  # Перезапись файла при каждом запуске
 # создаем хендлер и указываем в какой папке будет лог и имя лога:
 file_handler = logging.FileHandler('../logs/utils.log')
 # создаем и настраиваем  форматтер логера:
