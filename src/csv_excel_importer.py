@@ -1,4 +1,5 @@
 import csv
+
 import pandas as pd
 
 
@@ -8,7 +9,7 @@ def csv_import(path_file):
     try:
         with open(path_file, 'r', encoding='utf-8') as csv_file:
             reader = csv.reader(csv_file)
-            next(reader)    # закоментируй строку чтобы выdодилась первая строка тоже
+            next(reader)  # закоментируй строку чтобы выdодилась первая строка тоже
             for row in reader:
                 transactions.append(row)
     except Exception as e:
