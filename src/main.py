@@ -1,13 +1,12 @@
 import os
 
 from src.processing import filter_by_state, sort_by_date
-from src.utils import (
-    filter_by_currency,
-    filter_by_description,
-    get_transactions_info_csv,
-    get_transactions_info_json,
-    get_transactions_info_xlsx,
-)
+from src.search_operations import filter_by_description
+from src.utils import filter_by_currency
+from src.utils import filter_by_description
+from src.utils import get_transactions_info_csv
+from src.utils import get_transactions_info_json
+from src.utils import get_transactions_info_xlsx
 from src.widget import get_date, mask_account_card
 
 # Получаем абсолютный путь до текущей директории
@@ -131,7 +130,7 @@ def main():
         if input_word_filter == "Да":
             input_filter_word = str(
                 input(
-                    "Пожалуйста, укажите слово, по которому будет проводиться фильтрация"
+                    "Пожалуйста, укажите слово, по которому будет проводиться фильтрация "
                 )
             )
             description_filter = filter_by_description(
