@@ -8,6 +8,7 @@ from src.utils import get_transactions_info_csv
 from src.utils import get_transactions_info_json
 from src.utils import get_transactions_info_xlsx
 from src.widget import get_date, mask_account_card
+from src.services import df_to_dict, transfers_and_cash_grouped
 
 # Получаем абсолютный путь до текущей директории
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -102,6 +103,13 @@ def main():
 
         else:
             date_sort = state_filter
+
+        # Запрос у пользователя, хочет ли он вывести список переводов
+    user_choose = input("Хотите вывести список переводов для физических лиц? (да/нет)\n").lower()
+    if user_choose == "да":
+        df_transfer_kash = df_to_dict(data_fraime)
+        result_transfer_kash = transfers_and_cash_grouped(df_transfer_kash)
+        print(result_transfer_kash)
 
     input_currency = str(input("Выводить только рублевые транзакции? Да/Нет ").title())
     while input_currency not in ["Да", "Нет"]:
